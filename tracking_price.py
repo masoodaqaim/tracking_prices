@@ -6,9 +6,10 @@ url = 'https://www.amazon.com/Introducing-Echo-Show-Compact-Charcoal/dp/B07HZLHP
 
 # creating a header with information from our browser. google search 'my user agent'. make sure it's a dictionary
 headers = {'User_Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0'}
+page = requests.get(url, headers=headers)  # the call to the webpage
+soup = BeautifulSoup(page.content, 'html.parser')  # saves all webpage data
 
-page = requests.get(url, headers=headers)
-
-soup = BeautifulSoup(page.content, 'html.parser')
-
-print(soup.prettify())
+#print(soup.prettify())  # just to see what it prints
+title = soup.find(id='productTitle')  # need to know the html code/variable. inspect element
+price = soup.find(id='priceblock_ourprice')
+print(price)  # returns a string
